@@ -3,7 +3,7 @@
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CharacterList from "../../pages/CharacterList";
+import CharacterScreen from "../../pages/CharacterScreen";
 import axios from "axios";
 
 const Index = () => {
@@ -28,7 +28,6 @@ const Index = () => {
       setLoading(false);
       setIsRefreshing(false);
     } catch (error) {
-      console.error(error);
       setLoading(false);
       setIsRefreshing(false);
     }
@@ -38,6 +37,8 @@ const Index = () => {
     if (!isRefreshing) {
       setIsRefreshing(true);
       setPage((prevPage) => prevPage + 1);
+    } else {
+      return new Error();
     }
   };
 
@@ -46,7 +47,7 @@ const Index = () => {
       {loading && page === 1 ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
-        <CharacterList
+        <CharacterScreen
           characters={characters}
           loading={loading}
           isRefreshing={isRefreshing}

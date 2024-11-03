@@ -9,7 +9,7 @@ import {
   StyleSheet,
 } from "react-native";
 
-const CharacterList = ({
+const CharacterScreen = ({
   characters,
   isRefreshing,
   loading,
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CharacterList;
+export default CharacterScreen;
