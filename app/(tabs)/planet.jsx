@@ -60,7 +60,7 @@ export default Index;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#000",
     borderTopColor: tint,
     borderTopWidth: 1,
   },
