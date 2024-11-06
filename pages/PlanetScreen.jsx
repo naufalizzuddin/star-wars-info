@@ -9,24 +9,19 @@ import {
   StyleSheet,
 } from "react-native";
 
-const CharacterScreen = ({
-  characters,
-  isRefreshing,
-  loading,
-  handleLoadMore,
-}) => {
-  const renderCharacterItem = ({ item }) => (
+const PlanetScreen = ({ planets, isRefreshing, loading, handleLoadMore }) => {
+  const renderPlanetItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Text style={styles.characterName}>{item.name}</Text>
+      <Text style={styles.planetName}>{item.name}</Text>
     </View>
   );
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={characters}
+        data={planets}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={renderCharacterItem}
+        renderItem={renderPlanetItem}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
         numColumns={2}
@@ -58,16 +53,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: "center",
   },
-  characterName: {
+  planetName: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#eb7734",
     textAlign: "center",
   },
-  characterInfo: {
+  planetInfo: {
     fontSize: 12,
     color: "#eb7734",
   },
 });
 
-export default CharacterScreen;
+export default PlanetScreen;

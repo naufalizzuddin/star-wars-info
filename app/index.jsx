@@ -5,6 +5,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { Image } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 const Onboarding = () => {
   return (

@@ -10,12 +10,11 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
-
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+import Header from "../components/header/Header";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -38,7 +37,17 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: true,
+            headerLeft: () => <Header />,
+            headerBackVisible: false,
+            headerStyle: {
+              backgroundColor: "#000",
+            },
+          }}
+        />
       </Stack>
       <StatusBar style="light" backgroundColor="#000" />
     </ThemeProvider>

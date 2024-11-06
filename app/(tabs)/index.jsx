@@ -2,9 +2,9 @@
 
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CharacterScreen from "../../pages/CharacterScreen";
 import axios from "axios";
+import { tint } from "@/constants/Colors";
 
 const Index = () => {
   const [characters, setCharacters] = useState([]);
@@ -43,7 +43,7 @@ const Index = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {loading && page === 1 ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
@@ -54,7 +54,7 @@ const Index = () => {
           handleLoadMore={handleLoadMore}
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -63,5 +63,8 @@ export default Index;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    borderTopColor: tint,
+    borderTopWidth: 1,
   },
 });
