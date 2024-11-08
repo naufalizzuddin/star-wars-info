@@ -24,7 +24,7 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  const [user, setUser] = useState("Naufal");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (loaded) {
