@@ -2,7 +2,7 @@
 
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
-import PlanetScreen from "../../pages/PlanetScreen";
+import PlanetScreen from "../../pages/screens/PlanetScreen";
 import axios from "axios";
 import { tint } from "@/constants/Colors";
 
@@ -42,7 +42,7 @@ const Index = () => {
   return (
     <View style={styles.container}>
       {loading && page === 1 ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color={tint} />
       ) : (
         <PlanetScreen
           planets={planets}
