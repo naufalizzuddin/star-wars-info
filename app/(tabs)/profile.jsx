@@ -46,13 +46,40 @@ const Profile = () => {
               Hi, {user == null || user == "" ? "User" : user}
             </Text>
             <Text style={styles.description}>
-              Star Wars Info adalah aplikasi mobile yang dibuat khusus untuk
-              para penggemar Star Wars, memungkinkan mereka menemukan berbagai
-              informasi menarik tentang dunia Star Wars. Aplikasi ini memiliki
-              antarmuka yang sederhana, memudahkan pengguna untuk menemukan data
-              lengkap tentang karakter, planet, starship, dan elemen lain yang
-              ikonik dari cerita ini. Semua informasi diambil dari SWAPI (Star
-              Wars API) sehingga selalu akurat dan terbaru.
+              "Star Wars Info" is a streamlined app for fans of the Star Wars
+              universe, offering quick and easy access to essential information
+              about characters, planets, and starships. Powered by data from the
+              Star Wars API (SWAPI), the app provides:
+            </Text>
+            <View style={styles.descriptionContainer}>
+              <Text style={styles.descriptionHeader}>Features:</Text>
+              <View style={styles.bulletContainer}>
+                <Text style={styles.bullet}>•</Text>
+                <Text style={styles.bulletText}>
+                  Character Profiles: Get concise information about popular and
+                  lesser-known characters from across the Star Wars saga.
+                </Text>
+              </View>
+              <View style={styles.bulletContainer}>
+                <Text style={styles.bullet}>•</Text>
+                <Text style={styles.bulletText}>
+                  Planet Details: Explore various planets, including data on
+                  climates, populations, and terrains.
+                </Text>
+              </View>
+              <View style={styles.bulletContainer}>
+                <Text style={styles.bullet}>•</Text>
+                <Text style={styles.bulletText}>
+                  Starship Specs: Discover specifications and details for iconic
+                  starships that make up the Star Wars galaxy.
+                </Text>
+              </View>
+            </View>
+            <Text style={styles.description}>
+              Designed for ease of use, "Star Wars Info" delivers an informative
+              experience for fans who want quick access to Star Wars data,
+              whether they’re casual fans or avid enthusiasts. Dive in and
+              explore the galaxy right from your device!
             </Text>
           </View>
           <View style={styles.container}>
@@ -120,7 +147,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     overflow: "hidden",
-    marginTop: 50,
+    marginVertical: 50,
   },
   text: {
     textAlign: "center",
@@ -137,5 +164,33 @@ const styles = StyleSheet.create({
     width: 35,
     marginTop: 6,
     marginHorizontal: 5,
+  },
+  descriptionContainer: {
+    marginTop: 10,
+    marginHorizontal: 10,
+  },
+  descriptionHeader: {
+    color: tint,
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+    marginHorizontal: 10,
+  },
+  bulletContainer: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginVertical: 4,
+    marginHorizontal: 12,
+  },
+  bullet: {
+    color: tint,
+    fontSize: 16,
+    marginRight: 8,
+  },
+  bulletText: {
+    color: tint,
+    fontSize: 16,
+    flexShrink: 1,
+    textAlign: "justify",
   },
 });
