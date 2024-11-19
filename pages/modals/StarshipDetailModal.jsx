@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import { useFonts } from "expo-font";
 import { tint } from "../../constants/Colors";
 
 const StarshipDetailModal = ({
@@ -17,10 +18,19 @@ const StarshipDetailModal = ({
   starshipDetails,
   loadingDetails,
 }) => {
+  const [fontsLoaded] = useFonts({
+    "Oswald-Regular": require("../../assets/fonts/Oswald-Regular.ttf"),
+    "Oswald-Bold": require("../../assets/fonts/Oswald-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator size="large" color={tint} />;
+  }
+
   return (
     <Modal
       visible={visible}
-      animationType="slide"
+      animationType="fade"
       transparent={true}
       onRequestClose={onClose}
     >
@@ -32,30 +42,40 @@ const StarshipDetailModal = ({
             starshipDetails && (
               <>
                 <Text style={styles.modalTitle}>{starshipDetails.name}</Text>
-                <Text style={styles.modalDescription}>
-                  Model: {starshipDetails.model}
-                </Text>
-                <Text style={styles.modalDescription}>
-                  Manufacturer: {starshipDetails.manufacturer}
-                </Text>
-                <Text style={styles.modalDescription}>
-                  Cost in Credits: {starshipDetails.cost_in_credits}
-                </Text>
-                <Text style={styles.modalDescription}>
-                  Length: {starshipDetails.length} m
-                </Text>
-                <Text style={styles.modalDescription}>
-                  Max Speed: {starshipDetails.max_atmosphering_speed} km/h
-                </Text>
-                <Text style={styles.modalDescription}>
-                  Crew: {starshipDetails.crew}
-                </Text>
-                <Text style={styles.modalDescription}>
-                  Passengers: {starshipDetails.passengers}
-                </Text>
-                <Text style={styles.modalDescription}>
-                  Hyperdrive Rating: {starshipDetails.hyperdrive_rating}
-                </Text>
+                <View style={styles.detailsContainer}>
+                  <Text style={styles.modalDescription}>
+                    <Text style={styles.label}>Model:</Text>{" "}
+                    {starshipDetails.model}
+                  </Text>
+                  <Text style={styles.modalDescription}>
+                    <Text style={styles.label}>Manufacturer:</Text>{" "}
+                    {starshipDetails.manufacturer}
+                  </Text>
+                  <Text style={styles.modalDescription}>
+                    <Text style={styles.label}>Cost in Credits:</Text>{" "}
+                    {starshipDetails.cost_in_credits}
+                  </Text>
+                  <Text style={styles.modalDescription}>
+                    <Text style={styles.label}>Length:</Text>{" "}
+                    {starshipDetails.length} m
+                  </Text>
+                  <Text style={styles.modalDescription}>
+                    <Text style={styles.label}>Max Speed:</Text>{" "}
+                    {starshipDetails.max_atmosphering_speed} km/h
+                  </Text>
+                  <Text style={styles.modalDescription}>
+                    <Text style={styles.label}>Crew:</Text>{" "}
+                    {starshipDetails.crew}
+                  </Text>
+                  <Text style={styles.modalDescription}>
+                    <Text style={styles.label}>Passengers:</Text>{" "}
+                    {starshipDetails.passengers}
+                  </Text>
+                  <Text style={styles.modalDescription}>
+                    <Text style={styles.label}>Hyperdrive Rating:</Text>{" "}
+                    {starshipDetails.hyperdrive_rating}
+                  </Text>
+                </View>
                 <TouchableOpacity style={styles.modalButton} onPress={onClose}>
                   <Text style={styles.modalButtonText}>Close</Text>
                 </TouchableOpacity>
@@ -72,39 +92,55 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    padding: 20,
   },
   modalContent: {
-    margin: 20,
     padding: 20,
-    backgroundColor: "#000",
-    borderRadius: 10,
+    backgroundColor: "#111",
+    borderRadius: 15,
     alignItems: "center",
-    borderColor: "#fff",
+    borderColor: tint,
     borderWidth: 1,
+    shadowColor: "#fff",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 10,
   },
   modalTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
+    fontSize: 26,
+    fontFamily: "Oswald-Bold",
+    marginBottom: 15,
     color: tint,
+    textTransform: "uppercase",
+    textAlign: "center",
+  },
+  detailsContainer: {
+    width: "100%",
+    marginBottom: 15,
   },
   modalDescription: {
     fontSize: 16,
+    fontFamily: "Oswald-Regular",
+    color: "#ddd",
+    marginBottom: 8,
+  },
+  label: {
+    fontFamily: "Oswald-Bold",
     color: tint,
-    marginBottom: 5,
   },
   modalButton: {
-    backgroundColor: "#000",
-    borderColor: "#fff",
-    borderWidth: 1,
+    backgroundColor: tint,
     borderRadius: 10,
-    padding: 5,
-    marginTop: 5,
-    width: 100,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginTop: 15,
+    width: "60%",
   },
   modalButtonText: {
-    color: tint,
+    fontFamily: "Oswald-Bold",
+    color: "#000",
     fontSize: 18,
     textAlign: "center",
   },

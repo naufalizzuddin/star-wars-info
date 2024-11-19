@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { useFonts } from "expo-font";
 import { tint } from "../../constants/Colors";
 import CharacterDetailModal from "../modals/CharacterDetailModal";
 
@@ -22,6 +23,11 @@ const CharacterScreen = ({
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [characterDetails, setCharacterDetails] = useState(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    "Oswald-Regular": require("../../assets/fonts/Oswald-Regular.ttf"),
+    "Oswald-Bold": require("../../assets/fonts/Oswald-Bold.ttf"),
+  });
 
   const fetchCharacterDetails = async (url) => {
     try {
@@ -38,7 +44,7 @@ const CharacterScreen = ({
 
   const renderCharacterItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.itemContainer}
+      style={styles.cardContainer}
       onPress={() => {
         setSelectedCharacter(item);
         fetchCharacterDetails(item.url);
@@ -55,8 +61,13 @@ const CharacterScreen = ({
     setCharacterDetails(null);
   };
 
+  if (!fontsLoaded) {
+    return <ActivityIndicator size="large" color={tint} />;
+  }
+
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Characters</Text>
       <FlatList
         data={characters}
         keyExtractor={(item, index) => index.toString()}
@@ -67,6 +78,7 @@ const CharacterScreen = ({
         ListFooterComponent={
           isRefreshing ? <ActivityIndicator size="small" color={tint} /> : null
         }
+        columnWrapperStyle={styles.columnWrapper}
       />
 
       <CharacterDetailModal
@@ -85,21 +97,36 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#000",
   },
-  itemContainer: {
+  title: {
+    fontSize: 24,
+    fontFamily: "Oswald-Bold",
+    color: tint,
+    textAlign: "center",
+    marginBottom: 5,
+    textTransform: "uppercase",
+  },
+  columnWrapper: {
+    justifyContent: "space-between",
+  },
+  cardContainer: {
     flex: 1,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#ddd",
+    margin: 8,
+    backgroundColor: "#1a1a1a",
+    borderRadius: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
     alignItems: "center",
-    marginHorizontal: 10,
-    marginTop: 0,
-    marginBottom: 20,
     justifyContent: "center",
+    shadowColor: "#fff",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   characterName: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#eb7734",
+    fontSize: 16,
+    fontFamily: "Oswald-Bold",
+    color: tint,
     textAlign: "center",
   },
 });

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import CharacterScreen from "../../pages/screens/CharacterScreen";
 import axios from "axios";
 import { tint } from "@/constants/Colors";
+import { useFonts } from "expo-font";
 
 const Index = () => {
   const [characters, setCharacters] = useState([]);

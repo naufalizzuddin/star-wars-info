@@ -21,7 +21,9 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    "Oswald-Regular": require("../assets/fonts/Oswald-Regular.ttf"),
+    "Oswald-Bold": require("../assets/fonts/Oswald-Bold.ttf"),
+    "Oswald-SemiBold": require("../assets/fonts/Oswald-SemiBold.ttf"),
   });
 
   const [user, setUser] = useState(null);
@@ -48,8 +50,8 @@ export default function RootLayout() {
           <Stack.Screen
             name="(tabs)"
             options={{
-              headerShown: true,
               headerLeft: () => <Header />,
+              headerTitle: "",
               headerBackVisible: false,
               headerStyle: {
                 backgroundColor: "#000",

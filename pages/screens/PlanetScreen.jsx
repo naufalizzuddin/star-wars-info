@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { useFonts } from "expo-font";
 import { tint } from "../../constants/Colors";
 import PlanetDetailModal from "../modals/PlanetDetailModal";
 
@@ -17,6 +18,11 @@ const PlanetScreen = ({ planets, isRefreshing, loading, handleLoadMore }) => {
   const [selectedPlanet, setSelectedPlanet] = useState(null);
   const [planetDetails, setPlanetDetails] = useState(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    "Oswald-Regular": require("../../assets/fonts/Oswald-Regular.ttf"),
+    "Oswald-Bold": require("../../assets/fonts/Oswald-Bold.ttf"),
+  });
 
   const fetchPlanetDetails = async (url) => {
     try {
@@ -33,7 +39,7 @@ const PlanetScreen = ({ planets, isRefreshing, loading, handleLoadMore }) => {
 
   const renderPlanetItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.itemContainer}
+      style={styles.cardContainer}
       onPress={() => {
         setSelectedPlanet(item);
         fetchPlanetDetails(item.url);
@@ -50,8 +56,13 @@ const PlanetScreen = ({ planets, isRefreshing, loading, handleLoadMore }) => {
     setPlanetDetails(null);
   };
 
+  if (!fontsLoaded) {
+    return <ActivityIndicator size="large" color={tint} />;
+  }
+
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Planets</Text>
       <FlatList
         data={planets}
         keyExtractor={(item, index) => index.toString()}
@@ -62,6 +73,7 @@ const PlanetScreen = ({ planets, isRefreshing, loading, handleLoadMore }) => {
         ListFooterComponent={
           isRefreshing ? <ActivityIndicator size="small" color={tint} /> : null
         }
+        columnWrapperStyle={styles.columnWrapper}
       />
 
       <PlanetDetailModal
@@ -80,21 +92,36 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#000",
   },
-  itemContainer: {
+  title: {
+    fontSize: 24,
+    fontFamily: "Oswald-Bold",
+    color: tint,
+    textAlign: "center",
+    marginBottom: 5,
+    textTransform: "uppercase",
+  },
+  columnWrapper: {
+    justifyContent: "space-between",
+  },
+  cardContainer: {
     flex: 1,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#ddd",
+    margin: 8,
+    backgroundColor: "#1a1a1a",
+    borderRadius: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
     alignItems: "center",
-    marginHorizontal: 10,
-    marginTop: 0,
-    marginBottom: 20,
     justifyContent: "center",
+    shadowColor: "#fff",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   planetName: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#eb7734",
+    fontSize: 16,
+    fontFamily: "Oswald-Bold",
+    color: tint,
     textAlign: "center",
   },
 });
