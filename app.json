@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "starwars-info",
-    "slug": "starwars-info",
+    "name": "Star Wars Info",
+    "slug": "star-wars-info",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "starwarsinfo",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true
@@ -18,8 +18,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#000000"
+      },
+      "package": "com.naufalizzuddin.starwarsinfo"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +32,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "89f40660-b4ab-48e2-94e3-ef1aaacbbffd"
+      }
     }
   }
 }
