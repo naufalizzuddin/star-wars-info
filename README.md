@@ -6,7 +6,7 @@ Star Wars Info merupakan sebuah aplikasi tentang franchise Star Wars yang berisi
 Nama: Naufal Izzuddin Taufik <br>
 NIM: 21120122140102
 
-# Tutorial
+## Tutorial
 1. Install dependensi
 ```console
 npm install
